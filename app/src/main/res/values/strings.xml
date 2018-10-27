@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Blood Bank</string>
     <string name="registration">Registration</string>
+    <string name="name_hint">Enter Name</string>
+    <string name="enter_aadhaar_number">Enter Aadhaar Number</string>
+    <string name="enter_contact_number">Enter Contact Number</string>
+    <string name="enter_email_id">Enter Email Address</string>
+    <string name="male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_other">Other</string>
+    <string name="register">Register</string>
 </resources>
