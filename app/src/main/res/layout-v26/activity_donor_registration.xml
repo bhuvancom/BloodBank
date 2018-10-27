@@ -181,5 +181,5 @@
         android:layout_centerHorizontal="true"
         android:text="@string/register"
         android:textColor="@color/white_color"
-        android:backgroundTint="@color/colorPrimaryDark" />
+        android:background="@color/colorAccent" />
 </RelativeLayout>
