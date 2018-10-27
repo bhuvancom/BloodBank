@@ -38,6 +38,7 @@
         android:textSize="25sp" />
 
     <ScrollView
+        android:id="@+id/scrollReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvRegText">
@@ -51,7 +52,8 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/TextInputLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="4dp">
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/EtName"
@@ -69,7 +71,8 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/TextInputLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="4dp">
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/et_mobile"
@@ -86,7 +89,8 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/TextInputLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="4dp">
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/et_aadhaar"
@@ -105,7 +109,8 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/TextInputLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="4dp">
 
                 <android.support.v7.widget.AppCompatEditText
 
@@ -128,36 +133,53 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="4dp">
 
                     <RadioButton
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorAccent"
                         android:layout_height="wrap_content"
-                        android:text="@string/male" />
+                        android:layout_weight="1"
+                        android:text="@string/male"
+                        android:textColor="@color/colorAccent" />
 
                     <RadioButton
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorAccent"
                         android:layout_height="wrap_content"
-                        android:text="@string/gender_female" />
+                        android:layout_weight="1"
+                        android:text="@string/gender_female"
+                        android:textColor="@color/colorAccent" />
 
                     <RadioButton
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/colorAccent"
                         android:shadowColor="@color/colorAccent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/gender_other" />
+                        android:text="@string/gender_other"
+                        android:textColor="@color/colorAccent" />
                 </LinearLayout>
             </RadioGroup>
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:tooltipText="Select Blood Group"></Spinner>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:padding="4dp" />
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scrollReg"
+        android:layout_centerHorizontal="true"
+        android:text="@string/register"
+        android:textColor="@color/white_color"
+        android:backgroundTint="@color/colorPrimaryDark" />
 </RelativeLayout>
