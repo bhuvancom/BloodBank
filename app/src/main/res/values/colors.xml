@@ -9,4 +9,5 @@
 
     // rest text like popup box text color
     <color name="colorAccent">#ab003c</color>
+    <color name="white_color">#fff</color>
 </resources>
