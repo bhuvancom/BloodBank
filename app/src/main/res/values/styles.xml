@@ -8,4 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyAppTheme" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

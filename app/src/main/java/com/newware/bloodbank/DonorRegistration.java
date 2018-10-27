@@ -11,5 +11,6 @@ public class DonorRegistration extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donor_registration);
+//        getSupportActionBar().setElevation(0);
     }
 }
