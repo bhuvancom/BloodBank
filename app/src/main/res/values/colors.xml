@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    // tool bar color
+    <color name="colorPrimary">#f50057</color>
+
+    // notification area
+    <color name="colorPrimaryDark">#ab003c</color>
+
+    // rest text like popup box text color
+    <color name="colorAccent">#ab003c</color>
 </resources>
