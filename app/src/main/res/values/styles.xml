@@ -9,6 +9,7 @@
     </style>
 
     <style name="MyAppTheme" parent="AppTheme">
-        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>
