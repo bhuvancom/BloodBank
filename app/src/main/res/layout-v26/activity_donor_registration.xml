@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="0dp"
     android:theme="@style/MyAppTheme"
     app:elevation="0dp"
-    android:id="@+id/relativeRegister"
     tools:context=".DonorRegistration">
 
     <TextView
@@ -40,10 +40,10 @@
 
     <ScrollView
         android:id="@+id/scrollReg"
-        android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvRegText">
+        android:layout_below="@id/tvRegText"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -145,8 +145,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/male"
                         android:checked="true"
+                        android:text="@string/male"
                         android:textColor="@color/colorAccent" />
 
                     <RadioButton
@@ -168,12 +168,18 @@
                 </LinearLayout>
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blood_group"
+                android:textColor="@color/colorAccent" />
+
             <Spinner
+                android:id="@+id/spinnerBloodGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:id="@+id/spinnerBloodGroup"
-                android:tooltipText="Select Blood Group"></Spinner>
+                android:tooltipText="Select Blood Group" />
         </LinearLayout>
     </ScrollView>
 
@@ -182,8 +188,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/scrollReg"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
         android:text="@string/register"
-        android:textColor="@color/white_color"
-        android:background="@color/colorAccent" />
+        android:id="@+id/btnRegister"
+        android:textColor="@color/white_color" />
 
 </RelativeLayout>

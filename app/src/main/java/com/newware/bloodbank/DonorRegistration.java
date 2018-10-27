@@ -3,11 +3,20 @@ package com.newware.bloodbank;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DonorRegistration extends AppCompatActivity
 {
@@ -15,8 +24,9 @@ public class DonorRegistration extends AppCompatActivity
     RelativeLayout relativeLayout;
     EditText etName, etAadhaar, etDOB, etPhone, etEmail;
     RadioGroup gender;
+    Button btnReg;
     RadioButton genderSex;
-    Spinner bloodGroup;
+    Spinner bloodGroupSpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,7 +38,33 @@ public class DonorRegistration extends AppCompatActivity
         getUi();
         final String[] bloodGroup = {"A+", "A-", "AB+", "AB-", "B+", "B-", "O-", "O+"};
 
+        List<String> bloodList = new ArrayList<>(Arrays.asList(bloodGroup));
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bloodList);
+        //arrayAdapter.setDropDownViewResource();
+        bloodGroupSpin.setAdapter(arrayAdapter);
+
+
+        bloodGroupSpin.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                String itm = parent.getItemAtPosition(position).toString();
+                Toast.makeText(DonorRegistration.this, "" + itm, Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnReg.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+            }
+        });
+
     }
+
 
     private void getUi()
     {
@@ -37,7 +73,8 @@ public class DonorRegistration extends AppCompatActivity
         etEmail = findViewById(R.id.et_email);
         etPhone = findViewById(R.id.et_mobile);
 
-        bloodGroup = findViewById(R.id.spinnerBloodGroup);
+        btnReg = findViewById(R.id.btnRegister);
+        bloodGroupSpin = findViewById(R.id.spinnerBloodGroup);
 
         gender = findViewById(R.id.gender); // radio group
 
