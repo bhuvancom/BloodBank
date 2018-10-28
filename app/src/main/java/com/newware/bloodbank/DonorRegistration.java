@@ -28,6 +28,7 @@ public class DonorRegistration extends AppCompatActivity
     RadioButton genderSex;
     Spinner bloodGroupSpin;
 
+    String st = "";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,18 +41,27 @@ public class DonorRegistration extends AppCompatActivity
 
         List<String> bloodList = new ArrayList<>(Arrays.asList(bloodGroup));
 
+        // creating arrayAdapter and setting to spinner
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, bloodList);
-        //arrayAdapter.setDropDownViewResource();
-        bloodGroupSpin.setAdapter(arrayAdapter);
 
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //setting layout type for dropdown
+        bloodGroupSpin.setAdapter(arrayAdapter);//setting adapter
+        bloodGroupSpin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
 
-        bloodGroupSpin.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        bloodGroupSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                String itm = parent.getItemAtPosition(position).toString();
-                Toast.makeText(DonorRegistration.this, "" + itm, Toast.LENGTH_SHORT).show();
+                st += parent.getItemAtPosition(position);
+                Toast.makeText(DonorRegistration.this, "" + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
             }
         });
         btnReg.setOnClickListener(new View.OnClickListener()
@@ -59,6 +69,8 @@ public class DonorRegistration extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                DonorRegistrationBean data = new DonorRegistrationBean();
+                //Toast.makeText(DonorRegistration.this, ""+st+"\n"+genderSex.getTransitionName(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -73,11 +85,11 @@ public class DonorRegistration extends AppCompatActivity
         etEmail = findViewById(R.id.et_email);
         etPhone = findViewById(R.id.et_mobile);
 
+        //todo: add dob
         btnReg = findViewById(R.id.btnRegister);
         bloodGroupSpin = findViewById(R.id.spinnerBloodGroup);
 
         gender = findViewById(R.id.gender); // radio group
-
         int gen = gender.getCheckedRadioButtonId(); // get selected sex id
         genderSex = findViewById(gen);// set identification to checked id
 
