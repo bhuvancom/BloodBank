@@ -78,17 +78,28 @@ public class DonorRegistration extends AppCompatActivity
                 String name = etName.getText().toString().trim();
                 String aadhaar = etAadhaar.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
-                String dob = etDOB.getText().toString().trim();
+                //String dob = etDOB.getText().toString().trim();
                 String phone = etPhone.getText().toString().trim();
 //                String gender = genderSex
                 String bloodGroup = st;
-                if (!(isAadhaarCorrect(aadhaar) && isEmailCorrect(email) && isNameCorrect(name) && isNumberCorrect(phone)))
+                if (!(isAadhaarCorrect(aadhaar) || isNameCorrect(name) || isNumberCorrect(phone)))
                 {
                     showSnackBar("Please Enter Correct Data");
                     return;
                 }
-                DonorRegistrationBean data = new DonorRegistrationBean(name, "g", bloodGroup, phone, dob, aadhaar, email);
-                Toast.makeText(DonorRegistration.this, "" + data, Toast.LENGTH_SHORT).show();
+                if (!isEmailCorrect(email))
+                {
+                    showSnackBar("Email is wrong");
+                    return;
+                }
+
+
+                DonorRegistrationBean data
+                        = new DonorRegistrationBean(name, "g", bloodGroup, phone, "dob ", aadhaar, email);
+
+
+                Toast.makeText(DonorRegistration.this,
+                        "" + data, Toast.LENGTH_SHORT).show();
                 //registerUserToFireBase(data);
                 //Toast.makeText(DonorRegistration.this, ""+st+"\n"+genderSex.getTransitionName(), Toast.LENGTH_SHORT).show();
 
@@ -128,7 +139,17 @@ public class DonorRegistration extends AppCompatActivity
 
     boolean isEmailCorrect(String email)
     {
-        return email.length() >= 10 && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if (email.length() < 10)
+        {
+            etEmail.setError("Email Address is too short");
+            return false;
+        }
+        else if (!(Patterns.EMAIL_ADDRESS.matcher(email).matches()))
+        {
+            etEmail.setError("Email Address is wrong");
+            return false;
+        }
+        return true;
 
     }
 
@@ -154,9 +175,9 @@ public class DonorRegistration extends AppCompatActivity
 
     boolean isNumberCorrect(String nmbr)
     {
-        if (nmbr.length() < 12)
+        if (nmbr.length() < 10)
         {
-            etPhone.setError("Aadhaar must 12 digit long");
+            etPhone.setError("Mobile must 10 digit long");
             return false;
         }
         return true;
