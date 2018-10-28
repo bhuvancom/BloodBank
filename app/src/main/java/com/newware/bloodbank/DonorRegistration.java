@@ -46,7 +46,7 @@ public class DonorRegistration extends AppCompatActivity
 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //setting layout type for dropdown
         bloodGroupSpin.setAdapter(arrayAdapter);//setting adapter
-        bloodGroupSpin.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
 
         bloodGroupSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -86,7 +86,7 @@ public class DonorRegistration extends AppCompatActivity
         etPhone = findViewById(R.id.et_mobile);
 
         //todo: add dob
-        btnReg = findViewById(R.id.btnDonorList);
+        btnReg = findViewById(R.id.btnRegister);
         bloodGroupSpin = findViewById(R.id.spinnerBloodGroup);
 
         gender = findViewById(R.id.gender); // radio group
