@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeRegister"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="0dp"
     android:theme="@style/MyAppTheme"
     app:elevation="0dp"
-    android:id="@+id/relativeRegister"
     tools:context=".DonorRegistration">
 
     <TextView
@@ -21,7 +21,8 @@
         android:padding="5dp"
         android:text="@string/app_name"
         android:textColor="@color/white_color"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/tvRegText"
@@ -40,10 +41,10 @@
 
     <ScrollView
         android:id="@+id/scrollReg"
-        android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvRegText">
+        android:layout_below="@id/tvRegText"
+        android:padding="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +59,7 @@
                 android:padding="6dp">
 
                 <EditText
-                    android:id="@+id/rtName"
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/name_hint"
@@ -129,6 +130,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <RadioGroup
+                android:id="@+id/gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center">
@@ -140,13 +142,16 @@
                     android:padding="6dp">
 
                     <RadioButton
+                        android:id="@+id/rbMale"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="true"
                         android:text="@string/male"
                         android:textColor="@color/colorAccent" />
 
                     <RadioButton
+                        android:id="@+id/rbFemale"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -154,6 +159,7 @@
                         android:textColor="@color/colorAccent" />
 
                     <RadioButton
+                        android:id="@+id/rbOther"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -163,12 +169,18 @@
                 </LinearLayout>
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blood_group"
+                android:textColor="@color/colorAccent" />
+
             <Spinner
+                android:id="@+id/spinnerBloodGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:id="@+id/spinnerBloodGroup"
-                android:tooltipText="Select Blood Group"></Spinner>
+                android:tooltipText="Select Blood Group" />
         </LinearLayout>
     </ScrollView>
 
@@ -177,8 +189,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/scrollReg"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
         android:text="@string/register"
-        android:textColor="@color/white_color"
-        android:background="@color/colorAccent" />
+        android:id="@+id/btnRegister"
+        android:textColor="@color/white_color" />
 
 </RelativeLayout>
