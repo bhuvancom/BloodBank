@@ -1,10 +1,12 @@
 package com.newware.bloodbank.Beans;
 
+import java.io.Serializable;
+
 /**
  * Created by Bhuvaneshvar Nath Srivastava on 28-10-2018 at 12:38 AM.
  * Copyright (c) 2018
  **/
-public class DonorRegistrationBean
+public class DonorRegistrationBean implements Serializable
 {
     private String name;
     private String gender;

@@ -3,6 +3,7 @@ package com.newware.bloodbank;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.newware.bloodbank.Beans.DonorRegistrationBean;
 
 import java.util.ArrayList;
@@ -29,8 +31,10 @@ public class DonorRegistration extends AppCompatActivity
     Button btnReg;
     RadioButton genderSex;
     Spinner bloodGroupSpin;
+    FirebaseDatabase firebaseDatabase;
 
     String st = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,7 +60,7 @@ public class DonorRegistration extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 st += parent.getItemAtPosition(position);
-                Toast.makeText(DonorRegistration.this, "" + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(DonorRegistration.this, "" + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -71,12 +75,31 @@ public class DonorRegistration extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                DonorRegistrationBean data = new DonorRegistrationBean();
+                String name = etName.getText().toString().trim();
+                String aadhaar = etAadhaar.getText().toString().trim();
+                String email = etEmail.getText().toString().trim();
+                String dob = etDOB.getText().toString().trim();
+                String phone = etPhone.getText().toString().trim();
+//                String gender = genderSex
+                String bloodGroup = st;
+                if (!(isAadhaarCorrect(aadhaar) && isEmailCorrect(email) && isNameCorrect(name) && isNumberCorrect(phone)))
+                {
+                    showSnackBar("Please Enter Correct Data");
+                    return;
+                }
+                DonorRegistrationBean data = new DonorRegistrationBean(name, "g", bloodGroup, phone, dob, aadhaar, email);
+                Toast.makeText(DonorRegistration.this, "" + data, Toast.LENGTH_SHORT).show();
+                //registerUserToFireBase(data);
                 //Toast.makeText(DonorRegistration.this, ""+st+"\n"+genderSex.getTransitionName(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
+    }
+
+    private void registerUserToFireBase(DonorRegistrationBean data)
+    {
+        firebaseDatabase = FirebaseDatabase.getInstance();
     }
 
 
@@ -100,5 +123,42 @@ public class DonorRegistration extends AppCompatActivity
     void showSnackBar(String str)
     {
         Snackbar.make(relativeLayout, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+
+    boolean isEmailCorrect(String email)
+    {
+        return email.length() >= 10 && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
+    }
+
+    boolean isNameCorrect(String name)
+    {
+        if (name.length() < 5)
+        {
+            etName.setError("Name is too short");
+            return false;
+        }
+        return true;
+    }
+
+    boolean isAadhaarCorrect(String aadhar)
+    {
+        if (aadhar.length() < 12)
+        {
+            etAadhaar.setError("Aadhaar must 12 digit long");
+            return false;
+        }
+        return true;
+    }
+
+    boolean isNumberCorrect(String nmbr)
+    {
+        if (nmbr.length() < 12)
+        {
+            etPhone.setError("Aadhaar must 12 digit long");
+            return false;
+        }
+        return true;
     }
 }

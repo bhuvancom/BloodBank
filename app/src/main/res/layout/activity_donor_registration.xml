@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/name_hint"
                     android:imeOptions="actionNext"
-                    android:inputType="textPersonName"
+                    android:inputType="textPersonName|textCapSentences"
                     android:maxLength="30"
                     android:textColor="@color/colorAccent"
                     android:textColorHint="#ff0000"
