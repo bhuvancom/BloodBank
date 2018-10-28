@@ -1,4 +1,4 @@
-package com.newware.bloodbank;
+package com.newware.bloodbank.Beans;
 
 /**
  * Created by Bhuvaneshvar Nath Srivastava on 28-10-2018 at 12:38 AM.

@@ -1,4 +1,4 @@
-package com.newware.bloodbank;
+package com.newware.bloodbank.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
  * Created by Bhuvaneshvar Nath Srivastava on 27-10-2018 at 08:58 PM.
  * Copyright (c) 2018
  **/
-public class AdapterClass extends RecyclerView.Adapter<AdapterClass.MyViewHolder>
+public class BloodListAdapter extends RecyclerView.Adapter<BloodListAdapter.MyViewHolder>
 {
     @NonNull
     @Override

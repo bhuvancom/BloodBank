@@ -1,9 +1,12 @@
-package com.newware.bloodbank;
+package com.newware.bloodbank.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+
+import com.newware.bloodbank.MainActivity;
+import com.newware.bloodbank.R;
 
 public class SplashScreen extends AppCompatActivity
 {

@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.newware.bloodbank.Beans.DonorRegistrationBean;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
