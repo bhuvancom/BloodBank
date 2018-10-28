@@ -22,8 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DonorList">
-
+        <activity
+            android:name=".DonorList"
+            android:theme="@style/MyAppTheme">
         </activity>
     </application>
 

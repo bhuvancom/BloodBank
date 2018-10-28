@@ -173,13 +173,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/blood_group"
+                android:padding="4dp"
                 android:textColor="@color/colorAccent" />
 
             <Spinner
                 android:id="@+id/spinnerBloodGroup"
-                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="8dp"
                 android:tooltipText="Select Blood Group" />
         </LinearLayout>
     </ScrollView>
