@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(MainActivity.this, DonorRegistration.class));
+                startActivity(new Intent(MainActivity.this, DonorList.class));
             }
         });
     }
 
     private void setUi()
     {
-        btnRegistartion = findViewById(R.id.btnRegistartion);
+        btnRegistartion = findViewById(R.id.btnDonorList);
     }
 }

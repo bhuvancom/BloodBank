@@ -5,20 +5,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_MainActivity">
+
+    </android.support.v7.widget.RecyclerView>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@color/colorAccent"
-        android:text="Add Donor"
+        android:text="@string/donors"
         android:textColor="@color/white_color"
         android:padding="5dp"
-        android:drawableLeft="@drawable/ic_person_add_black_24dp"
         android:drawablePadding="5dp"
-        android:drawableTint="@color/white_color"
         android:layout_margin="5dp"
         android:elevation="4dp"
-        android:id="@+id/btnRegistartion" />
+        android:id="@+id/btnDonorList"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

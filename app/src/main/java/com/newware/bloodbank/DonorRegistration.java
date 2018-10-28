@@ -86,7 +86,7 @@ public class DonorRegistration extends AppCompatActivity
         etPhone = findViewById(R.id.et_mobile);
 
         //todo: add dob
-        btnReg = findViewById(R.id.btnRegister);
+        btnReg = findViewById(R.id.btnDonorList);
         bloodGroupSpin = findViewById(R.id.spinnerBloodGroup);
 
         gender = findViewById(R.id.gender); // radio group

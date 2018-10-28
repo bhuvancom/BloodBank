@@ -10,4 +10,6 @@
     <string name="gender_other">Other</string>
     <string name="register">Register</string>
     <string name="blood_group">Blood Group :</string>
+    <string name="donors">Donors</string>
+    <string name="add_donor">Add Donor</string>
 </resources>
