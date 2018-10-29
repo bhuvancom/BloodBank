@@ -1,6 +1,8 @@
 package com.newware.bloodbank;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -69,7 +71,7 @@ public class DonorRegistration extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                st += parent.getItemAtPosition(position);
+                st = parent.getItemAtPosition(position).toString();
                 // Toast.makeText(DonorRegistration.this, "" + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
             }
@@ -104,39 +106,39 @@ public class DonorRegistration extends AppCompatActivity
          */
 
 
-        btnReg.setOnClickListener(v ->
+        btnReg.setOnClickListener((View v) ->
         {
             String name = etName.getText().toString().trim();
             String aadhaar = etAadhaar.getText().toString().trim();
-            long aadhar = 0;
-            try
-            {
-                aadhar = Long.parseLong(aadhaar);
-
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-                Toast.makeText(this, "Mobile text input is wrong", Toast.LENGTH_SHORT).show();
-                return;
-            }
             String email = etEmail.getText().toString().trim();
             String dob = tvDOBdata.getText().toString().trim();
             String phone = etPhone.getText().toString().trim();
 
             int gen = gender.getCheckedRadioButtonId(); // get selected sex id
             RBgenderSex = findViewById(gen);
-
+            // Toast.makeText(this, ""+dob, Toast.LENGTH_SHORT).show();
             String gender = RBgenderSex.getText().toString();
-
-            String bloodGroup1 = st;
-
-            if (!(isAadhaarCorrect(aadhaar) || isNameCorrect(name) || isNumberCorrect(phone)))
+            if (!isAadhaarCorrect(aadhaar))
             {
                 showSnackBar("Please Enter Correct Data");
+                etAadhaar.requestFocus();
+                return;
+            }
+            if (!isNameCorrect(name))
+            {
+                showSnackBar("Please Enter Correct Data");
+                etName.requestFocus();
+                return;
+            }
+            if (!isNumberCorrect(phone))
+            {
+                showSnackBar("Please Enter Correct Data");
+                etPhone.requestFocus();
                 return;
             }
             if (!isEmailCorrect(email))
             {
+                etEmail.requestFocus();
                 showSnackBar("Email is wrong");
                 return;
             }
@@ -156,9 +158,35 @@ public class DonorRegistration extends AppCompatActivity
 
 //            Toast.makeText(this, ""+age, Toast.LENGTH_SHORT).show();
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(
+                    "Name :\t\t" + name
+                            + "\nAadhaar : \t\t\t"
+                            + aadhaar + "\nMobile :\t\t\t"
+                            + phone + "\nGender:\t\t\t" + gender
+                            + "\nBlood Group :\t\t\t" + st
+                            + "\nDOB : \t\t\t\t" + dob);
+            builder.setTitle("Please Review Data Before Save");
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    dialog.cancel();
+                }
+            })
+                    .setPositiveButton("Register", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            //todo: send data to database
+                            DonorRegistrationBean data
+                                    = new DonorRegistrationBean(name, gender, st, phone, dob, aadhaar, email);
+                        }
+                    }).setCancelable(false).show();
 
-//                DonorRegistrationBean data
-//                        = new DonorRegistrationBean(name, gender, bloodGroup, phone, "dob ", aadhaar, email);
+
 
 
 //                Toast.makeText(DonorRegistration.this,
@@ -241,6 +269,7 @@ public class DonorRegistration extends AppCompatActivity
             etName.setError("Name is too short");
             return false;
         }
+
         return true;
     }
 
@@ -249,6 +278,11 @@ public class DonorRegistration extends AppCompatActivity
         if (aadhar.length() < 12)
         {
             etAadhaar.setError("Aadhaar must 12 digit long");
+            return false;
+        }
+        else if (!aadhar.matches("^[0-9]{12}"))
+        {
+            etAadhaar.setError("Only Numbers Are Allowed");
             return false;
         }
         return true;
@@ -260,6 +294,10 @@ public class DonorRegistration extends AppCompatActivity
         {
             etPhone.setError("Mobile must 10 digit long");
             return false;
+        }
+        else if (!nmbr.matches("^[0-9]{10}"))
+        {
+            etPhone.setError("Only Numbers are allowed");
         }
         return true;
     }
