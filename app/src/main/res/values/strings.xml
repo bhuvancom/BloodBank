@@ -12,4 +12,8 @@
     <string name="blood_group">Choose Blood Group :</string>
     <string name="donors">Donors</string>
     <string name="add_donor">Add Donor</string>
+    <string name="no_data_add_donor">No Data Add Donor</string>
+    <string name="select_gender">Select Gender :</string>
+    <string name="click_to_select_date_of_birth">Click to select Date of Birth\t</string>
+    <string name="dd_mm_yyy">DD/MM/YYY</string>
 </resources>

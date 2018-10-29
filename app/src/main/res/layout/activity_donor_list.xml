@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:theme="@style/MyAppTheme"
     tools:context=".DonorList">
@@ -42,10 +44,16 @@
             android:drawableStart="@drawable/ic_person_add_black_24dp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvNoDonor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_add_donor"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal" />
     <android.support.v7.widget.RecyclerView
         android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/llDonorList"
-        android:elevation="4dp" />
-</RelativeLayout>
+        app:elevation="4dp" />
+</LinearLayout>

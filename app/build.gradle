@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -26,7 +30,7 @@ dependencies {
     //firebase start
 
     implementation 'com.google.firebase:firebase-database:16.0.4'
-    implementation 'com.google.firebase:firebase-firestore:17.1.2'
+    //implementation 'com.google.firebase:firebase-firestore:17.1.2'
 
 
     //firebase ends
