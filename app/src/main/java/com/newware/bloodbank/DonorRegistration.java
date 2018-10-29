@@ -80,7 +80,7 @@ public class DonorRegistration extends AppCompatActivity
                 String email = etEmail.getText().toString().trim();
                 //String dob = etDOB.getText().toString().trim();
                 String phone = etPhone.getText().toString().trim();
-//                String gender = genderSex
+                String gender = genderSex.getText().toString();
                 String bloodGroup = st;
                 if (!(isAadhaarCorrect(aadhaar) || isNameCorrect(name) || isNumberCorrect(phone)))
                 {
@@ -95,11 +95,11 @@ public class DonorRegistration extends AppCompatActivity
 
 
                 DonorRegistrationBean data
-                        = new DonorRegistrationBean(name, "g", bloodGroup, phone, "dob ", aadhaar, email);
+                        = new DonorRegistrationBean(name, gender, bloodGroup, phone, "dob ", aadhaar, email);
 
 
                 Toast.makeText(DonorRegistration.this,
-                        "" + data, Toast.LENGTH_SHORT).show();
+                        "" + data.getGender() + "\n" + data.getBloodGroup(), Toast.LENGTH_SHORT).show();
                 //registerUserToFireBase(data);
                 //Toast.makeText(DonorRegistration.this, ""+st+"\n"+genderSex.getTransitionName(), Toast.LENGTH_SHORT).show();
 

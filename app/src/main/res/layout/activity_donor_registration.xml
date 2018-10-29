@@ -14,6 +14,7 @@
         android:id="@+id/tvAppName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
@@ -21,8 +22,7 @@
         android:padding="5dp"
         android:text="@string/app_name"
         android:textColor="@color/white_color"
-        android:textSize="25sp"
-        android:layout_alignParentLeft="true" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/tvRegText"
@@ -116,7 +116,6 @@
                 android:padding="6dp">
 
                 <EditText
-
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,6 +154,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="false"
                         android:text="@string/gender_female"
                         android:textColor="@color/colorAccent" />
 
@@ -163,38 +163,48 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="false"
                         android:shadowColor="@color/colorAccent"
                         android:text="@string/gender_other"
                         android:textColor="@color/colorAccent" />
                 </LinearLayout>
             </RadioGroup>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/blood_group"
-                android:padding="4dp"
-                android:textColor="@color/colorAccent" />
+                android:orientation="horizontal"
+                android:padding="4dp">
 
-            <Spinner
-                android:id="@+id/spinnerBloodGroup"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="8dp"
-                android:tooltipText="Select Blood Group" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:padding="8dp"
+                    android:text="@string/blood_group"
+                    android:textColor="@color/colorAccent" />
+
+                <Spinner
+                    android:id="@+id/spinnerBloodGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:tooltipText="Select Blood Group" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <Button
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/scrollReg"
         android:layout_centerHorizontal="true"
         android:background="@color/colorAccent"
         android:text="@string/register"
-        android:id="@+id/btnRegister"
         android:textColor="@color/white_color" />
 
 </RelativeLayout>
