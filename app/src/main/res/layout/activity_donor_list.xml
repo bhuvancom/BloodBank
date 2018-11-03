@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:theme="@style/MyAppTheme"
     tools:context=".DonorList">
 
     <LinearLayout
         android:id="@+id/llDonorList"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tvAppName"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:background="@color/colorPrimary"
             android:fontFamily="sans-serif-condensed"
             android:padding="10dp"
@@ -30,30 +30,44 @@
             android:id="@+id/tvAddDonor"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/add_donor"
-            android:layout_weight="1"
-            android:drawablePadding="4dp"
-            android:padding="4dp"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/ic_person_add_black_24dp"
-            android:drawableTint="@color/white_color"
-            android:textColor="@color/white_color"
-            android:textSize="15sp"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:drawableStart="@drawable/ic_person_add_black_24dp" />
+            android:drawableLeft="@drawable/ic_person_add_black_24dp"
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/ic_person_add_black_24dp"
+            android:drawableTint="@color/white_color"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            android:text="@string/add_donor"
+            android:textColor="@color/white_color"
+            android:textSize="15sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvNoDonor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_data_add_donor"
-        android:gravity="center_vertical"
-        android:layout_gravity="center_horizontal" />
-    <android.support.v7.widget.RecyclerView
-        android:padding="4dp"
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/STRDonorList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="4dp" />
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvNoDonor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"
+                android:text="@string/no_data_add_donor" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_donorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                app:elevation="4dp" />
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

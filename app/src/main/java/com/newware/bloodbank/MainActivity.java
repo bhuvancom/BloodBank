@@ -14,13 +14,14 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity
 {
     Button btnRegistartion;
+    private boolean isConnection;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //checkConnection();
         setUi();
-
 
         btnRegistartion.setOnClickListener(new View.OnClickListener()
         {
@@ -36,4 +37,38 @@ public class MainActivity extends AppCompatActivity
     {
         btnRegistartion = findViewById(R.id.btnDonorList);
     }
+
+//    @Override
+//    public void onNetworkConnectionChanged(boolean isConnected)
+//    {
+//        isConnection = isConnected;
+//    }
+//
+//    private void checkConnection() {
+//        //MyApplication.getInstance().setConnectivityListener(this);
+//        isConnection = ConnectivityReceiver.isConnected();
+//        if (!isConnection) {
+//            //Snackbar.make(linearLayout, "Internet Connection loss", Snackbar.LENGTH_LONG).show();
+//            AlertDialog.Builder ab = new AlertDialog.Builder(this);
+//            ab.setMessage("No internet Connection press Cancel to exit.\nPress Retry if internet connection is resumed.")
+//                    .setPositiveButton("Retry", new DialogInterface.OnClickListener()
+//                    {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which)
+//                        {
+//                            checkConnection();
+//                        }
+//                    })
+//                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+//                    {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which)
+//                        {
+//                            dialog.dismiss();
+//                            finish();
+//                        }
+//                    })
+//                    .show().setTitle("No Internet Found");
+//        }
+//    }
 }

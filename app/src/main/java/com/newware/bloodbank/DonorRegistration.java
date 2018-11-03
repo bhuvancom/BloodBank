@@ -3,7 +3,9 @@ package com.newware.bloodbank;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
@@ -20,7 +22,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.newware.bloodbank.Beans.DonorRegistrationBean;
 
 import java.util.ArrayList;
@@ -43,6 +53,7 @@ public class DonorRegistration extends AppCompatActivity
     String st = "";
     private DatePicker datePicker;
     private int YEAR, MONTH, DAY;
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -165,7 +176,9 @@ public class DonorRegistration extends AppCompatActivity
                             + aadhaar + "\nMobile :\t\t\t"
                             + phone + "\nGender:\t\t\t" + gender
                             + "\nBlood Group :\t\t\t" + st
-                            + "\nDOB : \t\t\t\t" + dob);
+                            + "\nDOB : \t\t\t\t" + dob
+                            + "\nEmail  : \t\t" + email);
+
             builder.setTitle("Please Review Data Before Save");
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
             {
@@ -183,10 +196,9 @@ public class DonorRegistration extends AppCompatActivity
                             //todo: send data to database
                             DonorRegistrationBean data
                                     = new DonorRegistrationBean(name, gender, st, phone, dob, aadhaar, email);
+                            registerUserToFireBase(data);
                         }
                     }).setCancelable(false).show();
-
-
 
 
 //                Toast.makeText(DonorRegistration.this,
@@ -210,7 +222,8 @@ public class DonorRegistration extends AppCompatActivity
                 DAY = dayOfMonth;
                 YEAR = year;
                 MONTH = month + 1;
-                tvDOBdata.setText(DAY + "/" + MONTH + "/" + YEAR);
+                tvDOBdata.setText(String.valueOf(DAY) + "/" + MONTH + "/" + YEAR);
+                tvDOBdata.setTextSize(18);
             }
         }, CURRENT_DATE.get(Calendar.YEAR), CURRENT_DATE.get(Calendar.MONTH), CURRENT_DATE.get(Calendar.DATE)).show();
     }
@@ -218,7 +231,60 @@ public class DonorRegistration extends AppCompatActivity
 
     private void registerUserToFireBase(DonorRegistrationBean data)
     {
+        showDialog();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = firebaseDatabase.getReference("UserData");
+        mReference.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.hasChild(data.getAadhaar()))
+                {
+                    Toast.makeText(DonorRegistration.this, "User Already Registered.\nSending to Donation Page wait..", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DonorRegistration.this, DonateBlood.class);
+                    intent.putExtra("aadhaar", data.getAadhaar());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                    DonorRegistration.this.finish();
+                }
+                else
+                {
+                    mReference.child(data.getAadhaar()).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task)
+                        {
+                            dismissDialog();
+                            showSnackBar("User Added");
+                            Toast.makeText(DonorRegistration.this, "Registered", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(DonorRegistration.this, DonateBlood.class);
+                            intent.putExtra("aadhaar", data.getAadhaar());
+                            startActivity(intent);
+                            DonorRegistration.this.finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener()
+                    {
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+                            dismissDialog();
+                            Toast.makeText(DonorRegistration.this, "Error\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            showSnackBar("Registration Failed");
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                Toast.makeText(DonorRegistration.this, "Error\n" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
 
@@ -300,5 +366,27 @@ public class DonorRegistration extends AppCompatActivity
             etPhone.setError("Only Numbers are allowed");
         }
         return true;
+    }
+
+    public final void showDialog()
+    {
+        materialDialog = new MaterialDialog.Builder(this)
+                .title("Loading")
+                .titleColorRes(R.color.colorPrimary)
+                .backgroundColorRes(R.color.white_color)
+                .contentColorRes(R.color.colorAccent)
+                .cancelable(false)
+                .canceledOnTouchOutside(false)
+                .content("Please Wait...Adding")
+                .progress(true, 0)
+                .show();
+    }
+
+    public final void dismissDialog()
+    {
+        if (materialDialog != null)
+        {
+            materialDialog.dismiss();
+        }
     }
 }

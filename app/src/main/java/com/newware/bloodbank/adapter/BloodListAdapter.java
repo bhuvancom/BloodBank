@@ -11,6 +11,7 @@ import android.view.ViewGroup;
  **/
 public class BloodListAdapter extends RecyclerView.Adapter<BloodListAdapter.MyViewHolder>
 {
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
