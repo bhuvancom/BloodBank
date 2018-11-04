@@ -1,9 +1,11 @@
 package com.newware.bloodbank;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
@@ -56,6 +58,7 @@ public class BloodReceiver extends AppCompatActivity
     private String customMsg;
     private String receiverPurpose;
     private String receiverBloodGroup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -158,9 +161,7 @@ public class BloodReceiver extends AppCompatActivity
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which)
                             {
-                                //todo : send msg to donor with text msg;
-                                //giveBloodAndSendDetailsToDb(bloodDetails);
-                                Toast.makeText(BloodReceiver.this, "Done\nThank you", Toast.LENGTH_SHORT).show();
+                                giveBloodAndSendDetailsToDb(bloodDetails);
                             }
                         })
                         .show();
@@ -228,20 +229,50 @@ public class BloodReceiver extends AppCompatActivity
     {
         FirebaseDatabase fb = FirebaseDatabase.getInstance();
         DatabaseReference dbTo = fb.getReference("Blood_List");
-        dbTo.child(bloodGroup).child(bloodId).removeValue()
+        dbTo.child(bloodGroup).child(bloodId).setValue(null)
                 .addOnCompleteListener(new OnCompleteListener<Void>()
                 {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)
                     {
+                        if (btnGiveBlood != null)
+                            btnGiveBlood.setClickable(false);
+
                         Toast.makeText(BloodReceiver.this, "Blood Donation Complete", Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent(BloodReceiver.this, MainActivity.class);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent1);
-                        BloodReceiver.this.finish();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BloodReceiver.this);
+                        builder.setPositiveButton("Send", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Intent intentEmail = new Intent(Intent.ACTION_SEND);
+                                intentEmail.putExtra(Intent.EXTRA_EMAIL, new String[]{receiverEmail});
+                                intentEmail.putExtra(Intent.EXTRA_SUBJECT, "Your Donated Blood Is Used");
+                                intentEmail.putExtra(Intent.EXTRA_TEXT, "Hello " + donorDetails.get(2)
+                                        + "\nYour Blood was used for : " + receiverPurpose
+                                        + "\nBy : " + receiverName
+                                        + "\nOn : " + receivedDate
+                                        + "\nReceiver's Personal Message to You :\n" + customMsg
+                                        + "\n\n<b>Thank you, God Bless You.<b>");
+                                intentEmail.setType("message/rfc822");
+                                startActivity(Intent.createChooser(intentEmail, "Choose an email provider :"));
+                            }
+                        })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        dialog.dismiss();
+                                        exitFromHere();
+                                    }
+                                })
+                                .setTitle("Send Email to Donor ?")
+                                .setMessage("Click Send to send mail to Donor about this Blood Donation.\n" +
+                                        "Click No to go back.")
+                                .show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener()
@@ -269,7 +300,7 @@ public class BloodReceiver extends AppCompatActivity
                 .titleColorRes(R.color.colorPrimary)
                 .backgroundColorRes(R.color.white_color)
                 .contentColorRes(R.color.colorAccent)
-                .cancelable(false)
+                .cancelable(true)
                 .canceledOnTouchOutside(false)
                 .content("Please Wait Getting Request Done....")
                 .progress(true, 0)
@@ -350,4 +381,20 @@ public class BloodReceiver extends AppCompatActivity
         return true;
     }
 
+    void exitFromHere()
+    {
+        Intent intent1 = new Intent(BloodReceiver.this, MainActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent1);
+        BloodReceiver.this.finish();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        exitFromHere();
+    }
 }

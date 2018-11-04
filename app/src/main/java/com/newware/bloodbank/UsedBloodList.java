@@ -70,6 +70,7 @@ public class UsedBloodList extends AppCompatActivity
             {
                 swipeRefreshLayout.setRefreshing(false);
                 usedBloodDetails.clear();
+                dismissDialog();
                 for (DataSnapshot bllodId : dataSnapshot.getChildren())
                 {
                     String id = bllodId.getKey();
@@ -133,7 +134,7 @@ public class UsedBloodList extends AppCompatActivity
                 .titleColorRes(R.color.colorPrimary)
                 .backgroundColorRes(R.color.white_color)
                 .contentColorRes(R.color.colorAccent)
-                .cancelable(false)
+                .cancelable(true)
                 .canceledOnTouchOutside(false)
                 .content("Please Wait Getting Blood List ....")
                 .progress(true, 0)
@@ -151,5 +152,16 @@ public class UsedBloodList extends AppCompatActivity
     void showSnackBar(String str)
     {
         Snackbar.make(recyclerView, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        if (usedBloodDetails != null && adapter != null)
+        {
+            usedBloodDetails.clear();
+            adapter.notifyDataSetChanged();
+        }
+        super.onResume();
     }
 }

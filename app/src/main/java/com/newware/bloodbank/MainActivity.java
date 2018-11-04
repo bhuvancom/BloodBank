@@ -40,6 +40,18 @@ public class MainActivity extends AppCompatActivity
     private MaterialDialog materialDialog;
     private boolean isConnection;
 
+
+    @Override
+    protected void onResume()
+    {
+        if (bloodUnits != null && adapter != null)
+        {
+            bloodUnits.clear();
+            adapter.notifyDataSetChanged();
+        }
+        super.onResume();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -124,9 +136,9 @@ public class MainActivity extends AppCompatActivity
                 dismissDialog();
                 swipeRefreshLayout.setRefreshing(false);
                 bloodUnits.clear();
-                showDialog();
                 for (DataSnapshot bloodGrps : dataSnapshot.getChildren())
                 {
+                    showDialog();
                     String groupName = bloodGrps.getKey();
                     if (groupName != null)
                     {
@@ -169,7 +181,7 @@ public class MainActivity extends AppCompatActivity
                 .titleColorRes(R.color.colorPrimary)
                 .backgroundColorRes(R.color.white_color)
                 .contentColorRes(R.color.colorAccent)
-                .cancelable(false)
+                .cancelable(true)
                 .canceledOnTouchOutside(false)
                 .content("Please Wait Getting Blood List ....")
                 .progress(true, 0)

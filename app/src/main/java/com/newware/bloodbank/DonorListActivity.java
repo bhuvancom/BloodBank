@@ -98,6 +98,7 @@ public class DonorListActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 donorList.clear();
+                dismissDialog();
                 for (DataSnapshot aadhaarKeys : dataSnapshot.getChildren())
                 {
                     String aadhaarKey = aadhaarKeys.getKey();
@@ -171,7 +172,7 @@ public class DonorListActivity extends AppCompatActivity
                 .titleColorRes(R.color.colorPrimary)
                 .backgroundColorRes(R.color.white_color)
                 .contentColorRes(R.color.colorAccent)
-                .cancelable(false)
+                .cancelable(true)
                 .canceledOnTouchOutside(false)
                 .content("Please Wait Getting Donor List ....")
                 .progress(true, 0)
@@ -189,5 +190,16 @@ public class DonorListActivity extends AppCompatActivity
     void showSnackBar(String str)
     {
         Snackbar.make(recyclerView, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        if (donorList != null && adapter != null)
+        {
+            donorList.clear();
+            adapter.notifyDataSetChanged();
+        }
+        super.onResume();
     }
 }

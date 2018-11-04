@@ -213,7 +213,7 @@ public class BloodListWithGivenGroup extends AppCompatActivity
                 .titleColorRes(R.color.colorPrimary)
                 .backgroundColorRes(R.color.white_color)
                 .contentColorRes(R.color.colorAccent)
-                .cancelable(false)
+                .cancelable(true)
                 .canceledOnTouchOutside(false)
                 .content("Please Wait Fetching Blood List ....")
                 .progress(true, 0)
@@ -245,5 +245,16 @@ public class BloodListWithGivenGroup extends AppCompatActivity
             if (tvNoBloodData != null)
                 tvNoBloodData.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        if (bloodDataArrayList != null && adapter != null)
+        {
+            bloodDataArrayList.clear();
+            adapter.notifyDataSetChanged();
+        }
+        super.onResume();
     }
 }
