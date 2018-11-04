@@ -2,8 +2,8 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/STRBloodUnits"
     android:layout_width="match_parent"
-    android:padding="4dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="4dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -11,11 +11,24 @@
         android:layout_height="wrap_content"
         tools:context=".MainActivity">
 
+        <TextView
+            android:id="@+id/tvMainAvailableBlood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/availability"
+            android:textSize="24sp"
+            android:padding="4dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorAccent"
+            android:background="@color/white_color" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_MainActivity"
-            android:padding="4dp"
+            android:layout_below="@id/tvMainAvailableBlood"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="4dp">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -23,11 +36,11 @@
             android:id="@+id/btnDonorList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
             android:background="@color/colorAccent"
             android:padding="5dp"
             android:text="@string/donors"
-            android:layout_alignParentBottom="true"
             android:textColor="@color/white_color" />
     </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

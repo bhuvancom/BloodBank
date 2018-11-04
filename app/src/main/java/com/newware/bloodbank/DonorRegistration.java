@@ -239,10 +239,16 @@ public class DonorRegistration extends AppCompatActivity
                 {
                     Toast.makeText(DonorRegistration.this, "User Already Registered.\nSending to Donation Page wait..", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DonorRegistration.this, DonateBlood.class);
-                    intent.putExtra(ForDonorList.AADHAAR_EXTRA, data.getAadhaar());
-                    intent.putExtra(ForDonorList.NAME_EXTRA, data.getName());
-                    intent.putExtra(ForDonorList.BLOOD_GROUP, data.getBloodGroup());
-                    intent.putExtra(ForDonorList.DOATED_TIMES, data.getDonatedTimes());
+                    String beans[] = {
+                            data.getName()
+                            , data.getAadhaar()
+                            , data.getBloodGroup()
+                            , data.getEmailAddress()
+                            , data.getDob()
+                            , data.getGender()
+                            , String.valueOf(data.getDonatedTimes())
+                    };
+                    intent.putExtra(ForDonorList.AADHAAR_EXTRA, beans);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     DonorRegistration.this.finish();
@@ -260,11 +266,17 @@ public class DonorRegistration extends AppCompatActivity
 
                             Intent intent = new Intent(DonorRegistration.this, DonateBlood.class);
 
-                            intent.putExtra(ForDonorList.AADHAAR_EXTRA, data.getAadhaar());
-                            intent.putExtra(ForDonorList.NAME_EXTRA, data.getName());
-                            intent.putExtra(ForDonorList.BLOOD_GROUP, data.getBloodGroup());
-                            intent.putExtra(ForDonorList.DOATED_TIMES, data.getDonatedTimes());
-
+                            String beans[] = {
+                                    data.getName()
+                                    , data.getAadhaar()
+                                    , data.getBloodGroup()
+                                    , data.getEmailAddress()
+                                    , data.getDob()
+                                    , data.getGender()
+                                    , String.valueOf(data.getDonatedTimes())
+                            };
+                            intent.putExtra(ForDonorList.AADHAAR_EXTRA, beans);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
                             DonorRegistration.this.finish();
                         }

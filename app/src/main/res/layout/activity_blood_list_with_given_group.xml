@@ -7,7 +7,7 @@
     tools:context=".BloodListWithGivenGroup">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/STRDonorList"
+        android:id="@+id/STRBloodList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp">
@@ -43,7 +43,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tvNoBlood"
+                android:id="@+id/tvNoBloodFound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -61,5 +61,4 @@
                 app:elevation="4dp" />
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
-
 </RelativeLayout>

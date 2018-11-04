@@ -22,9 +22,6 @@ import java.util.ArrayList;
 public class ForDonorList extends RecyclerView.Adapter<ForDonorList.ViewHolderForCurrent>
 {
     public static final String AADHAAR_EXTRA = "AADHAAR_EXTRA";
-    public static final String NAME_EXTRA = "NAME_EXTRA";
-    public static final String DOATED_TIMES = "DONATED_TIMES_EXTRA";
-    public static final String BLOOD_GROUP = "BLOOD_GROUP";
 
 
     private ArrayList<DonorRegistrationBean> donorList;
@@ -84,11 +81,17 @@ public class ForDonorList extends RecyclerView.Adapter<ForDonorList.ViewHolderFo
                 public void onClick(View v)
                 {
                     DonorRegistrationBean bean = donorList.get(getAdapterPosition());
+                    String beans[] = {
+                            bean.getName()
+                            , bean.getAadhaar()
+                            , bean.getBloodGroup()
+                            , bean.getEmailAddress()
+                            , bean.getDob()
+                            , bean.getGender()
+                            , String.valueOf(bean.getDonatedTimes())
+                    };
                     Intent intent = new Intent(mContext, DonateBlood.class);
-                    intent.putExtra(ForDonorList.AADHAAR_EXTRA, bean.getAadhaar());
-                    intent.putExtra(ForDonorList.NAME_EXTRA, bean.getName());
-                    intent.putExtra(ForDonorList.DOATED_TIMES, bean.getDonatedTimes());
-                    intent.putExtra(ForDonorList.BLOOD_GROUP, bean.getBloodGroup());
+                    intent.putExtra(ForDonorList.AADHAAR_EXTRA, beans);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

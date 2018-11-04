@@ -8,8 +8,8 @@ import java.io.Serializable;
  **/
 public class BloodUnits implements Serializable
 {
-    String bloodGroup;
-    long units;
+    private String bloodGroup;
+    private long units;
 
     public BloodUnits(String bloodGroup, long units)
     {

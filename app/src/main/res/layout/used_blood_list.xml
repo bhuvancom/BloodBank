@@ -1,61 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="4dp"
+    android:background="@drawable/list_border"
+    android:layout_margin="4dp"
     android:orientation="horizontal">
 
     <LinearLayout
 
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Donor Name"
-            android:textColor="@color/colorAccent" />
+            android:textSize="17sp"
+            android:text="Receiver Name: " />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Blood Group"
-            android:textColor="@color/colorAccent" />
+            android:textSize="17sp"
+            android:text="Blood Id : " />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Donated on"
-            android:textColor="@color/colorAccent" />
+            android:textSize="17sp"
+            android:text="Blood Group :" />
+
+        <TextView
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Received On :" />
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Age"
-            android:textColor="@color/colorAccent" />
+            android:textSize="15sp"
+            android:text="Donor Contact :" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Email"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="Contact"
-            android:textColor="@color/colorAccent" />
+            android:textSize="15sp"
+            android:text="Purpose :" />
 
     </LinearLayout>
-
+    <!--<view-->
+    <!--android:layout_width="2dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:divider="@color/colorAccent"-->
+    <!--android:background="@color/colorAccent"/>-->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -66,42 +73,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:gravity="end"
             android:text="Name"
+            android:textSize="17sp"
+            android:id="@+id/tvReceiverName"
             android:textColor="@color/colorAccent" />
 
         <TextView
+            android:id="@+id/tvReceiverBloodId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="4dp"
+            android:text="Blood id"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tvReceiverGroupName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:gravity="end"
             android:text="Blood Group"
+            android:textSize="17sp"
             android:textColor="@color/colorAccent" />
 
         <TextView
+            android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:text="Donated on"
+            android:textSize="17sp"
+            android:id="@+id/tvBloodDonatedOnReceiver"
             android:textColor="@color/colorAccent" />
 
         <TextView
+            android:id="@+id/tvReceiverContact"
+            android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Age"
+            android:text="Donor Aadhaar"
+            android:textSize="17sp"
             android:textColor="@color/colorAccent" />
 
         <TextView
+            android:id="@+id/tvReceiverPurpose"
+            android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Email"
-            android:textColor="@color/colorAccent" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:text="Contact"
+            android:text="Purpose"
+            android:textSize="17sp"
             android:textColor="@color/colorAccent" />
 
     </LinearLayout>

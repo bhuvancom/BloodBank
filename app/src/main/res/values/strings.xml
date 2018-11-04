@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Blood Bank</string>
-    <string name="registration">Registration</string>
+    <string name="registration">Donor Registration</string>
     <string name="name_hint">Enter Name</string>
     <string name="enter_aadhaar_number">Enter Aadhaar Number</string>
     <string name="enter_contact_number">Enter Contact Number</string>
@@ -18,4 +18,11 @@
     <string name="dd_mm_yyy">DD/MM/YYY</string>
     <string name="donate_now">Click To Donate Now</string>
     <string name="no_blood_data_or_internet_might_not_available_ntry_swipe_to_refresh">No Blood Data Or Internet Might Not Available. Try Swipe To Refresh</string>
+    <string name="availability">Blood Availability</string>
+    <string name="last_donation_details">Last Donation Details</string>
+    <string name="purpose_behind_blood_need">Purpose behind blood need</string>
+    <string name="any_message_to_donor">Any Message to Donor ?</string>
+    <string name="enter_receiver_name">Enter Receiver Name</string>
+    <string name="blood_receiver">Blood receiver</string>
+    <string name="get_used_blood_list">Get Used Blood List</string>
 </resources>

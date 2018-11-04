@@ -73,5 +73,6 @@
                 android:paddingTop="4dp"
                 app:elevation="4dp" />
         </LinearLayout>
+
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

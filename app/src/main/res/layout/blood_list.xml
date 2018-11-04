@@ -1,7 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:background="@drawable/list_border"
+    android:layout_margin="4dp"
+    android:orientation="horizontal">
 
+    <LinearLayout
+
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textSize="17sp"
+            android:text="Blood Id : " />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textSize="17sp"
+            android:text="Blood Group :" />
+
+        <TextView
+            android:textSize="17sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Donated on :" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textSize="15sp"
+            android:text="Donor Aadhaar :" />
+
+    </LinearLayout>
+    <!--<view-->
+    <!--android:layout_width="2dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:divider="@color/colorAccent"-->
+    <!--android:background="@color/colorAccent"/>-->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:gravity="end"
+            android:text="Blood id"
+            android:textSize="17sp"
+            android:id="@+id/tvBloodId"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvBloodListGroupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:gravity="end"
+            android:text="Blood Group"
+            android:textSize="17sp"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Donated on"
+            android:textSize="17sp"
+            android:id="@+id/tvBloodDonatedOn"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tvBloodDonorAadhaar"
+            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Donor Aadhaar"
+            android:textSize="17sp"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
 </LinearLayout>

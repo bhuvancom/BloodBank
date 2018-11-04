@@ -7,7 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -22,10 +23,8 @@ import com.newware.bloodbank.adapter.ForDonorList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class DonateBlood extends AppCompatActivity
 {
@@ -34,9 +33,11 @@ public class DonateBlood extends AppCompatActivity
     private String donorAadhaar = "";
     private int donatedTimes = 0;
     private String bloodGroup = "";
-    RelativeLayout linearLayout;
+    LinearLayout linearLayout;
     Map<String, Object> updateDonorBloodDonatedCount;
     MaterialDialog materialDialog;
+    View layoutForPersonDetails;
+    private TextView tvDonorName, tvDonorEmail, tvDonorAadhar, tvDonorDOB, tvDonorGender, tvDonorBlood, tvDonatedTimes;
     //final static String[] bloodGroups = {"A+", "A-", "AB+", "AB-", "B+", "B-", "O-", "O+"};
 
     @Override
@@ -47,11 +48,19 @@ public class DonateBlood extends AppCompatActivity
         updateDonorBloodDonatedCount = new HashMap<>();
         getUi();
         Intent intent = getIntent();
-        donorAadhaar = intent.getStringExtra(ForDonorList.AADHAAR_EXTRA);
-        String donorName = intent.getStringExtra(ForDonorList.NAME_EXTRA);
-        donatedTimes = intent.getIntExtra(ForDonorList.DOATED_TIMES, 0);
-        bloodGroup = intent.getStringExtra(ForDonorList.BLOOD_GROUP);
-        showSnackBar(donorName);
+        String data[] = intent.getStringArrayExtra(ForDonorList.AADHAAR_EXTRA);//getData from Adapter
+
+        if (data != null)
+        {
+            showSnackBar(data[0]);
+            donorAadhaar = data[1];
+            bloodGroup = data[2];
+            donatedTimes = Integer.parseInt(data[6]);
+            setUserDetails(data);
+        }
+
+        if (donatedTimes == 0)
+            showSnackBar("Please Donate Blood, You have Donated 0 times");
 
         long idGen = System.currentTimeMillis() / 10000;
         String bloodId = donorAadhaar.concat(String.valueOf(idGen)); // creating blood id (new each time);
@@ -113,6 +122,8 @@ public class DonateBlood extends AppCompatActivity
             {
                 dismissDialog();
                 Intent intent = new Intent(DonateBlood.this, MainActivity.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
@@ -158,11 +169,11 @@ public class DonateBlood extends AppCompatActivity
 
     public static String getToday()
     {
-        Date presentTime_Date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss aa");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        return dateFormat.format(presentTime_Date);
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy, hh:mm:ss aa");
+        return df.format(c.getTime());
     }
+
 
     void showSnackBar(String str)
     {
@@ -174,7 +185,47 @@ public class DonateBlood extends AppCompatActivity
         linearLayout = findViewById(R.id.llDonateBlood);
         btnDonate = findViewById(R.id.btnDonationButton);
 
+
+        /**
+         * Layout included
+         */
+        layoutForPersonDetails = findViewById(R.id.includedDonorDetails);
+        /**
+         * Ends
+         */
+
+        /**
+         * Layout for Person details start
+         */
+        tvDonorBlood = layoutForPersonDetails.findViewById(R.id.tvDonorListBloodGroup);
+        tvDonorAadhar = layoutForPersonDetails.findViewById(R.id.tvDonorListAadhaar);
+        tvDonorName = layoutForPersonDetails.findViewById(R.id.tvDonorListName);
+        tvDonorDOB = layoutForPersonDetails.findViewById(R.id.tvDonorListDOB);
+        tvDonorGender = layoutForPersonDetails.findViewById(R.id.tvDonorListGender);
+        tvDonorEmail = layoutForPersonDetails.findViewById(R.id.tvDonorListEmail);
+        tvDonatedTimes = layoutForPersonDetails.findViewById(R.id.tvDonorListDonatedTimes);
+        /**
+         * Ends
+         */
+
+
     }
+
+    void setUserDetails(String bean[])
+    {
+        if (bean != null)
+        {
+            tvDonorName.setText(bean[0]);
+            tvDonorAadhar.setText(bean[1]);
+            tvDonorBlood.setText(bean[2]);
+            tvDonorEmail.setText(bean[3]);
+            tvDonorDOB.setText(bean[4]);
+            tvDonorGender.setText(bean[5]);
+            tvDonatedTimes.setText(new StringBuilder().append(bean[6]).append(" Times").toString());
+        }
+    }
+
+
 
     public final void showDialog()
     {
@@ -185,7 +236,7 @@ public class DonateBlood extends AppCompatActivity
                 .contentColorRes(R.color.colorAccent)
                 .cancelable(false)
                 .canceledOnTouchOutside(false)
-                .content("Please Wait Getting Donor List ....")
+                .content("Please Wait Saving Blood Details ....")
                 .progress(true, 0)
                 .show();
     }
