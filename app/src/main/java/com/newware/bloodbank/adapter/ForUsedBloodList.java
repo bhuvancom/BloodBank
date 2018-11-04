@@ -10,23 +10,23 @@ import android.view.ViewGroup;
 import com.newware.bloodbank.R;
 
 /**
- * Created by Bhuvaneshvar Nath Srivastava on 27-10-2018 at 08:58 PM.
+ * Created by Bhuvaneshvar Nath Srivastava on 03-11-2018 at 07:56 PM.
  * Copyright (c) 2018
  **/
-public class BloodListAdapter extends RecyclerView.Adapter<BloodListAdapter.MyViewHolder>
+public class ForUsedBloodList extends RecyclerView.Adapter<ForUsedBloodList.ViewHolder>
 {
-
     private Context context;
+
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(context).inflate(R.layout.blood_unit_list, parent, false);
-        return new MyViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
 
     }
@@ -37,10 +37,9 @@ public class BloodListAdapter extends RecyclerView.Adapter<BloodListAdapter.MyVi
         return 0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
+    class ViewHolder extends RecyclerView.ViewHolder
     {
-
-        public MyViewHolder(View itemView)
+        public ViewHolder(View itemView)
         {
             super(itemView);
         }

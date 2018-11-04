@@ -6,8 +6,40 @@ package com.newware.bloodbank.Beans;
  **/
 public class BloodData
 {
-    String bloodGroup;
-    String donorName;
-    String donatedOn;
-    String aadhaar;
+    private String bloodId;
+    private String bloodGroup;
+    private String donatedOnDate;
+    private String donorAadhaar;
+
+    public BloodData(String bloodId, String bloodGroup, String donatedOnDate, String donorAadhaar)
+    {
+        this.bloodId = bloodId;
+        this.bloodGroup = bloodGroup;
+        this.donatedOnDate = donatedOnDate;
+        this.donorAadhaar = donorAadhaar;
+    }
+
+    public BloodData()
+    {
+    }
+
+    public String getBloodId()
+    {
+        return bloodId;
+    }
+
+    public String getBloodGroup()
+    {
+        return bloodGroup;
+    }
+
+    public String getDonatedOnDate()
+    {
+        return donatedOnDate;
+    }
+
+    public String getDonorAadhaar()
+    {
+        return donorAadhaar;
+    }
 }

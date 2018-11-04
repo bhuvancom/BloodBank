@@ -1,6 +1,7 @@
 package com.newware.bloodbank.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.newware.bloodbank.Beans.DonorRegistrationBean;
+import com.newware.bloodbank.DonateBlood;
 import com.newware.bloodbank.R;
 
 import java.util.ArrayList;
@@ -19,6 +21,12 @@ import java.util.ArrayList;
  **/
 public class ForDonorList extends RecyclerView.Adapter<ForDonorList.ViewHolderForCurrent>
 {
+    public static final String AADHAAR_EXTRA = "AADHAAR_EXTRA";
+    public static final String NAME_EXTRA = "NAME_EXTRA";
+    public static final String DOATED_TIMES = "DONATED_TIMES_EXTRA";
+    public static final String BLOOD_GROUP = "BLOOD_GROUP";
+
+
     private ArrayList<DonorRegistrationBean> donorList;
     private Context mContext;
 
@@ -41,11 +49,12 @@ public class ForDonorList extends RecyclerView.Adapter<ForDonorList.ViewHolderFo
     {
         DonorRegistrationBean currentUser = donorList.get(position);
         holder.tvDonorName.setText(currentUser.getName());
-        holder.tvDonorEmail.setText(currentUser.getAadhaar());
+        holder.tvDonorEmail.setText(currentUser.getEmailAddress());
         holder.tvDonorGender.setText(currentUser.getGender());
         holder.tvDonorDOB.setText(currentUser.getDob());
         holder.tvDonorAadhar.setText(currentUser.getAadhaar());
         holder.tvDonorBlood.setText(currentUser.getBloodGroup());
+        holder.tvDonatedTimes.setText(new StringBuilder().append("").append(currentUser.getDonatedTimes()).append(" Times").toString());
     }
 
     @Override
@@ -56,7 +65,7 @@ public class ForDonorList extends RecyclerView.Adapter<ForDonorList.ViewHolderFo
 
     class ViewHolderForCurrent extends RecyclerView.ViewHolder
     {
-        private TextView tvDonorName, tvDonorEmail, tvDonorAadhar, tvDonorDOB, tvDonorGender, tvDonorBlood;
+        private TextView tvDonorName, tvDonorEmail, tvDonorAadhar, tvDonorDOB, tvDonorGender, tvDonorBlood, tvDonatedTimes;
 
         private ViewHolderForCurrent(View itemView)
         {
@@ -67,6 +76,27 @@ public class ForDonorList extends RecyclerView.Adapter<ForDonorList.ViewHolderFo
             tvDonorDOB = itemView.findViewById(R.id.tvDonorListDOB);
             tvDonorGender = itemView.findViewById(R.id.tvDonorListGender);
             tvDonorEmail = itemView.findViewById(R.id.tvDonorListEmail);
+            tvDonatedTimes = itemView.findViewById(R.id.tvDonorListDonatedTimes);
+
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    DonorRegistrationBean bean = donorList.get(getAdapterPosition());
+                    Intent intent = new Intent(mContext, DonateBlood.class);
+                    intent.putExtra(ForDonorList.AADHAAR_EXTRA, bean.getAadhaar());
+                    intent.putExtra(ForDonorList.NAME_EXTRA, bean.getName());
+                    intent.putExtra(ForDonorList.DOATED_TIMES, bean.getDonatedTimes());
+                    intent.putExtra(ForDonorList.BLOOD_GROUP, bean.getBloodGroup());
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 

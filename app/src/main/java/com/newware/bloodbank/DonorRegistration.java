@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.newware.bloodbank.Beans.DonorRegistrationBean;
+import com.newware.bloodbank.adapter.ForDonorList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -163,7 +164,7 @@ public class DonorRegistration extends AppCompatActivity
             int age = Ca.get(Calendar.YEAR) - YEAR;
             if ((age < 18))
             {
-                Toast.makeText(this, "Opps Your are not ELIGIBLE for donation", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Ops Your are not ELIGIBLE for donation", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -193,18 +194,12 @@ public class DonorRegistration extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which)
                         {
-                            //todo: send data to database
                             DonorRegistrationBean data
-                                    = new DonorRegistrationBean(name, gender, st, phone, dob, aadhaar, email);
+                                    = new DonorRegistrationBean(name, gender, st, phone, dob, aadhaar, email, 0);
                             registerUserToFireBase(data);
                         }
                     }).setCancelable(false).show();
 
-
-//                Toast.makeText(DonorRegistration.this,
-//                        "" + data.getGender() + "\n" + data.getBloodGroup(), Toast.LENGTH_SHORT).show();
-            //registerUserToFireBase(data);
-            //Toast.makeText(DonorRegistration.this, ""+st+"\n"+genderSex.getTransitionName(), Toast.LENGTH_SHORT).show();
 
         });
 
@@ -244,7 +239,10 @@ public class DonorRegistration extends AppCompatActivity
                 {
                     Toast.makeText(DonorRegistration.this, "User Already Registered.\nSending to Donation Page wait..", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DonorRegistration.this, DonateBlood.class);
-                    intent.putExtra("aadhaar", data.getAadhaar());
+                    intent.putExtra(ForDonorList.AADHAAR_EXTRA, data.getAadhaar());
+                    intent.putExtra(ForDonorList.NAME_EXTRA, data.getName());
+                    intent.putExtra(ForDonorList.BLOOD_GROUP, data.getBloodGroup());
+                    intent.putExtra(ForDonorList.DOATED_TIMES, data.getDonatedTimes());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     DonorRegistration.this.finish();
@@ -259,8 +257,14 @@ public class DonorRegistration extends AppCompatActivity
                             dismissDialog();
                             showSnackBar("User Added");
                             Toast.makeText(DonorRegistration.this, "Registered", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(DonorRegistration.this, DonateBlood.class);
-                            intent.putExtra("aadhaar", data.getAadhaar());
+
+                            intent.putExtra(ForDonorList.AADHAAR_EXTRA, data.getAadhaar());
+                            intent.putExtra(ForDonorList.NAME_EXTRA, data.getName());
+                            intent.putExtra(ForDonorList.BLOOD_GROUP, data.getBloodGroup());
+                            intent.putExtra(ForDonorList.DOATED_TIMES, data.getDonatedTimes());
+
                             startActivity(intent);
                             DonorRegistration.this.finish();
                         }

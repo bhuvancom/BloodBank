@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/MyAppTheme"
-    tools:context=".DonorList">
+    tools:context=".DonorListActivity">
 
     <LinearLayout
         android:id="@+id/llDonorList"
@@ -46,7 +46,8 @@
 
     <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/STRDonorList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="4dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
@@ -59,6 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textSize="25sp"
+                android:padding="6dp"
                 android:gravity="center_vertical"
                 android:text="@string/no_data_add_donor" />
 
@@ -67,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
+                android:paddingTop="4dp"
                 app:elevation="4dp" />
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>

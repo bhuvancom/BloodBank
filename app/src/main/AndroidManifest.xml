@@ -30,9 +30,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DonorList"
-            android:theme="@style/MyAppTheme"></activity>
-        <activity android:name=".DonateBlood"></activity>
+            android:name=".DonorListActivity"
+            android:theme="@style/MyAppTheme" />
+        <activity android:name=".DonateBlood" />
+        <activity android:name=".BloodListWithGivenGroup"></activity>
     </application>
 
 </manifest>

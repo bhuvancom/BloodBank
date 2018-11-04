@@ -12,8 +12,10 @@
     <string name="blood_group">Choose Blood Group :</string>
     <string name="donors">Donors</string>
     <string name="add_donor">Add Donor</string>
-    <string name="no_data_add_donor">No Data Add Donor</string>
+    <string name="no_data_add_donor">No Donors \nOR INTERNET MIGHT NOT AVAILABLE\nSwipe to Refresh</string>
     <string name="select_gender">Select Gender :</string>
     <string name="click_to_select_date_of_birth">Click to select Date of Birth\t</string>
     <string name="dd_mm_yyy">DD/MM/YYY</string>
+    <string name="donate_now">Click To Donate Now</string>
+    <string name="no_blood_data_or_internet_might_not_available_ntry_swipe_to_refresh">No Blood Data Or Internet Might Not Available. Try Swipe To Refresh</string>
 </resources>

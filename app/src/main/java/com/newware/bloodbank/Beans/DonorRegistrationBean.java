@@ -15,12 +15,13 @@ public class DonorRegistrationBean implements Serializable
     private String dob;
     private String aadhaar;
     private String emailAddress;
+    private int donatedTimes;
 
     public DonorRegistrationBean()
     {
     }
 
-    public DonorRegistrationBean(String name, String gender, String bloodGroup, String contactNo, String dob, String aadhaar, String emailAddress)
+    public DonorRegistrationBean(String name, String gender, String bloodGroup, String contactNo, String dob, String aadhaar, String emailAddress, int donatedTimes)
     {
         this.name = name;
         this.gender = gender;
@@ -29,8 +30,13 @@ public class DonorRegistrationBean implements Serializable
         this.dob = dob;
         this.aadhaar = aadhaar;
         this.emailAddress = emailAddress;
+        this.donatedTimes = donatedTimes;
     }
 
+    public int getDonatedTimes()
+    {
+        return donatedTimes;
+    }
 
     public String getName()
     {
